@@ -18,15 +18,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ModalCreate() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth()+1 == (10,11,12) 
-    ? `${today.getMonth()+1}` 
-    : `0${today.getMonth()+1}`;
-  const day = today.getDate();
-  const minDate = `${year}-${month}-${day}`
+  const today = new Date().toISOString().split('T')[0];
   
-
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [nota,setNota] = useState({note: '', date: ''});
@@ -89,7 +82,7 @@ export default function ModalCreate() {
           InputLabelProps={{
             shrink: true,
           }}
-          inputProps={{ min: minDate }} 
+          inputProps={{ min: today }} 
           variant="outlined"
           label="Concluir até:"
           margin="normal"

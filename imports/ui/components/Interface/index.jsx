@@ -10,7 +10,6 @@ import styled from 'styled-components';
 //Components
 import { NoteList } from './NoteList';
 import { Appbar } from './Appbar';
-import { useEffect } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -26,14 +25,14 @@ export const Interface = () =>{
     Meteor.subscribe("todasNotas")    
     return Anotacoes.find().fetch();
   });
-  useEffect(()=>console.log(notes));
+
   return(
     <>
       <Container>
         <Header>
-          <Appbar/>
+          <Appbar />
         </Header>
-        <NoteList props={notes}/>
+        <NoteList notas={notes}/>
       </Container>
     </>
   )

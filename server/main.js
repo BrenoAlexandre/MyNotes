@@ -11,10 +11,10 @@ Meteor.methods({
   deleteNote(id) {
     Anotacoes.remove({_id: id})
   },
-  editNota(id, novanota){
+  editNote(id, novanota){
     Anotacoes.update(
       {_id: id}, 
-      {$set: {note: novanota}}
+      {$set: {note: novanota.note, date: novanota.date}}
     )
   }
 })

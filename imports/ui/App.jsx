@@ -1,9 +1,5 @@
 import React from 'react';
 
-//Meteor
-import { useTracker } from 'meteor/react-meteor-data';
-import { Anotacoes } from '../api/links';
-
 //Styles
 import { GlobalStyle } from './GlobalStyle';
 import styled from 'styled-components';

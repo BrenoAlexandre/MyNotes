@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef, useCallback  } from 'react';
+
+import ModalEdit from './ModalEdit';
 
 import { makeStyles } from '@material-ui/core/styles';
-import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styled from 'styled-components';
 import {
@@ -36,38 +37,68 @@ const NoteBox = styled.div`
 
 export const NoteList = (props) =>{
   const classes = useStyles();
+  const [select, setSelect] = useState([])
 
-
-  delOneHandler = (event) => {
-    let id = event.target.nearestViewportElement.id
-    console.log(event.target.nearestViewportElement.id)
+  deleteOneHandler = (event) => {
+    let id = ''
+    if(event.target.id == ''){
+      id = event.target.parentElement.id
+    }else{
+      id = event.target.id
+    }
     Meteor.call('deleteNote', id, ()=>{})
   }
 
+  const addArray = (id) => {
+    setSelect([...select, id])
+  }
+  const removeArray = (id) => {
+    const filter = select.filter(ids => ids != id)
+    setSelect(filter); 
+  }
+  
+  const selectHandler = (e) =>{
+    if(e.target.checked){
+      addArray(e.target.id)
+    }else{
+      removeArray(e.target.id)
+    }
+  }
+  
   return (
     <NoteBox>
       <Paper className={classes.rounded} >
         <List component='ul'>
-          {props.props.map(({_id, note, date})=>{
+          {props.notas.map((nota)=>{
             return (
               <ListItem
-                key={_id}
+                key={nota._id}
                 ContainerComponent="li"
                 divider={true}
                 color="secondary"
                 disabled={false}
               >
-                <Checkbox color="primary" edge="start" size="medium" />
-                <ListItemText
-                  primary={note}
-                  secondary={`Concluir até: ${date}`}
+                <Checkbox
+                  id={nota._id}
+                  name={nota.note}
+                  onChange={selectHandler}
+                  color="primary"
+                  edge="start"
+                  size="medium"
                 />
+                <ListItemText
+                  primary={nota.note}
+                  secondary={`Concluir até: ${nota.date}`}
+                />
+                <ModalEdit nota={nota} />
                 <ListItemSecondaryAction>
-                  <IconButton edge="start" disabled={false}>
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton id={_id} onClick={delOneHandler} edge='end' disabled={false}>
-                    <DeleteIcon id={_id} />
+                  <IconButton
+                    id={nota._id}
+                    onClick={deleteOneHandler}
+                    edge="end"
+                    disabled={false}
+                  >
+                    <DeleteIcon id={nota._id} />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
