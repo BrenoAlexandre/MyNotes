@@ -12,14 +12,14 @@ import { NoteList } from './NoteList';
 import { Appbar } from './Appbar';
 import { useEffect } from 'react';
 
-  const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  `;
-  const Header = styled.header`
-    display: flex;
-  `;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+const Header = styled.header`
+  display: flex;
+`;
 
 export const Interface = () =>{
   const notes = useTracker(() => {

@@ -21,21 +21,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const NoteBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0px;
+  padding: 20px;
+  background-color: #8080807b; 
+  @media (max-width: 800px) {
+    /* Fazer */
+  }
+`;
+
 export const NoteList = (props) =>{
   const classes = useStyles();
 
-  const NoteBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 100%;
-    margin: 0px;
-    padding: 20px;
-    background-color: #8080807b; 
-    @media (max-width: 800px) {
-      /* Fazer */
-    }
-  `;
 
   delOneHandler = (event) => {
     let id = event.target.nearestViewportElement.id
