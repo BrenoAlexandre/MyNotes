@@ -5,18 +5,20 @@ Meteor.methods({
   newNote(nota) {
     Anotacoes.insert({
       note: nota.note,
-      date: nota.date
+      date: nota.date,
+      user_id: Meteor.userId(),
+      concluded: false
     })
   },
   deleteNote(id) {
     Anotacoes.remove({_id: id})
   },
-  editNote(id, novanota){
+  editNote(id, novanota) {
     Anotacoes.update(
       {_id: id}, 
-      {$set: {note: novanota.note, date: novanota.date}}
+      {$set: {note: novanota.note, date: novanota.date, concluded: novanota.concluded}}
     )
-  }
+  },
 })
 
 Meteor.publish("todasNotas", function(){

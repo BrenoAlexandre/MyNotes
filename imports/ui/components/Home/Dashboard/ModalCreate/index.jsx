@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Modal, TextField } from '@material-ui/core';
+import { Button, Modal, TextField, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -10,27 +11,30 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    ['@media(max-width: 650px)']: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '70%',
+    }
   },
 }));
 
-
 export default function ModalCreate() {
-  const today = new Date().toISOString().split('T')[0];
-  
-  const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const [nota,setNota] = useState({note: '', date: ''});
+  const today = new Date().toISOString().split('T')[0]
+  const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [nota,setNota] = useState({note: '', date: ''})
 
   const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const newNoteHandler = event =>{
     event.preventDefault();
@@ -38,57 +42,56 @@ export default function ModalCreate() {
       note: event.target[0].value,
       date: event.target[2].value
     })
-    console.log(nota);
     Meteor.call('newNote', nota, ()=>{})
     handleClose()
-    //Timeout de segurança para evitar tornar os campos nulos antes de enviar para o banco
-    setTimeout(()=>{
-      setNota({note: '', date: ''})
-    }, 200);
+    resetInputs()
+  }
+  const resetInputs = () =>{
+    setNota({note: '', date: ''})
   }
 
   const body = (
     <div className={classes.paper}>
-      <h2 id="simple-modal-title">Criar nova nota</h2>
+      <Typography variant='subtitle1'>Criar nova nota</Typography>
       <form onSubmit={newNoteHandler}>
         <TextField
           required
-          name="nota"
+          name='nota'
           value={nota.note}
           onChange={(event) => {
             setNota({ 
               note: event.target.value, 
               date: nota.date 
-            });
+            })
           }}
           InputLabelProps={{
             shrink: true,
           }}
-          variant="outlined"
-          label="Nota"
-          margin="normal"
+          variant='outlined'
+          label='Nota'
+          margin='normal'
           fullWidth
         />
         <TextField
-          type="date"
-          name="data"
+          type='date'
+          name='data'
           value={nota.date}
           onChange={(event) => {
             setNota({ 
               note: nota.note, 
               date: event.target.value 
-            });
+            })
           }}
           InputLabelProps={{
             shrink: true,
           }}
           inputProps={{ min: today }} 
-          variant="outlined"
-          label="Concluir até:"
-          margin="normal"
+          variant='outlined'
+          label='Concluir até:'
+          margin='normal'
           fullWidth
         />
-        <Button type="submit" color="primary" variant="contained" fullWidth>
+        <Button type='submit' color='primary' variant='contained' fullWidth>
           Salvar nota
         </Button>
       </form>

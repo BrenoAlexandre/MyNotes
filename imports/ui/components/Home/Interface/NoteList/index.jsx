@@ -1,43 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback  } from 'react';
+import React, { useState  } from 'react';
 
+//Components
 import ModalEdit from './ModalEdit';
 
+//Styles
+import { NoteBox } from './styles';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
-import styled from 'styled-components';
 import {
-  Checkbox,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Paper,
-} from "@material-ui/core";
+  Checkbox, IconButton, List, 
+  ListItem, ListItemSecondaryAction, 
+  ListItemText, Paper,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   rounded: {
-    overflow: "auto",
-    height: "79vh",
+    overflow: 'auto',
+    height: '83.1vh',
   },
-}));
-
-const NoteBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 100%;
-  margin: 0px;
-  padding: 20px;
-  background-color: #8080807b; 
-  @media (max-width: 800px) {
-    /* Fazer */
-  }
-`;
+}))
 
 export const NoteList = (props) =>{
   const classes = useStyles();
-  const [select, setSelect] = useState([])
+  const [selected, setselected] = useState([]);
 
   deleteOneHandler = (event) => {
     let id = ''
@@ -48,20 +33,20 @@ export const NoteList = (props) =>{
     }
     Meteor.call('deleteNote', id, ()=>{})
   }
-
   const addArray = (id) => {
-    setSelect([...select, id])
+    setselected([...selected, id])
+    props.onCheck([...selected, id])
   }
   const removeArray = (id) => {
-    const filter = select.filter(ids => ids != id)
-    setSelect(filter); 
+    const filter = selected.filter(ids => ids != id)
+    setselected(filter); 
+    props.onCheck(filter)
   }
-  
-  const selectHandler = (e) =>{
-    if(e.target.checked){
-      addArray(e.target.id)
+  const selectHandler = (event) => {
+    if(event.target.checked){
+      addArray(event.target.id)
     }else{
-      removeArray(e.target.id)
+      removeArray(event.target.id)
     }
   }
   
@@ -70,21 +55,24 @@ export const NoteList = (props) =>{
       <Paper className={classes.rounded} >
         <List component='ul'>
           {props.notas.map((nota)=>{
+            if(nota.user_id == Meteor.userId() || nota.user_id == null){
             return (
               <ListItem
                 key={nota._id}
-                ContainerComponent="li"
+                id={nota._id}
+                ContainerComponent='li'
                 divider={true}
-                color="secondary"
-                disabled={false}
+                color='secondary'
+                disabled={nota.concluded}
               >
                 <Checkbox
                   id={nota._id}
                   name={nota.note}
                   onChange={selectHandler}
-                  color="primary"
-                  edge="start"
-                  size="medium"
+                  color='primary'
+                  edge='start'
+                  size='medium'
+                  disabled={false}
                 />
                 <ListItemText
                   primary={nota.note}
@@ -95,14 +83,14 @@ export const NoteList = (props) =>{
                   <IconButton
                     id={nota._id}
                     onClick={deleteOneHandler}
-                    edge="end"
+                    edge='end'
                     disabled={false}
-                  >
+                    >
                     <DeleteIcon id={nota._id} />
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
-            );
+            )}
           })}
         </List>
       </Paper>
