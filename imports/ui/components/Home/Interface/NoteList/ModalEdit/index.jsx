@@ -53,9 +53,9 @@ export default function ModalEdit(props) {
 
   const resetInputs = () => {
     setNota({
-      note: props.nota.note, 
-      date: props.nota.date,
-      concluded: props.nota.concluded
+      note: nota.note, 
+      date: nota.date,
+      concluded: nota.concluded
     });
     setOpen(false);
   }
@@ -71,8 +71,8 @@ export default function ModalEdit(props) {
           onChange={(event) => {
             setNota({
               note: event.target.value,
-              date: props.nota.date,
-              concluded: props.nota.concluded
+              date: nota.date,
+              concluded: nota.concluded
             })
           }}
           InputLabelProps={{
@@ -89,9 +89,9 @@ export default function ModalEdit(props) {
           value={nota.date}
           onChange={(event) => {
             setNota({
-              note: props.nota.note,
+              note: nota.note,
               date: event.target.value,
-              concluded: props.nota.concluded
+              concluded: nota.concluded
             })
           }}
           InputLabelProps={{
@@ -109,8 +109,8 @@ export default function ModalEdit(props) {
               checked={nota.concluded}
               onChange={(event) => {
                 setNota({
-                  note: props.nota.note,
-                  date: props.nota.date,
+                  note: nota.note,
+                  date: nota.date,
                   concluded: event.target.checked
                 })
               }}
