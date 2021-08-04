@@ -45,7 +45,7 @@ export const Registro = () => {
       <Card>
         <CardContent>
           <Typography align='center' variant='h4' color='primary'>
-            Minhas Notas
+            Minhas Tarefas
           </Typography>
           <Typography align='center' variant='subtitle1' color='primary'>
             Preencha os campos abaixo:

@@ -26,7 +26,7 @@ export const Appbar = (props) =>{
           </MediaDiv>
           <ListItem>
             <Typography variant='h5' color='inherit'>
-              Minhas notas
+              Minhas tarefas
             </Typography>
           </ListItem>
           <ListItemSecondaryAction>

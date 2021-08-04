@@ -52,7 +52,7 @@ export default function ModalCreate() {
 
   const body = (
     <div className={classes.paper}>
-      <Typography variant='subtitle1'>Criar nova nota</Typography>
+      <Typography variant='subtitle1'>Criar nova tarefa</Typography>
       <form onSubmit={newNoteHandler}>
         <TextField
           required
@@ -92,7 +92,7 @@ export default function ModalCreate() {
           fullWidth
         />
         <Button type='submit' color='primary' variant='contained' fullWidth>
-          Salvar nota
+          Salvar tarefa
         </Button>
       </form>
     </div>
@@ -107,7 +107,7 @@ export default function ModalCreate() {
         variant='contained'
         fullWidth
       >
-        Nova nota
+        Nova tarefa
       </Button>
       <Modal
         open={open}

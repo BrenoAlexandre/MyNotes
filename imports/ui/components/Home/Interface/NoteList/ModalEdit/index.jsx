@@ -62,7 +62,7 @@ export default function ModalEdit(props) {
 
   const body = (
     <div className={classes.paper}>
-      <Typography variant='subtitle1'>Editar nota</Typography>
+      <Typography variant='subtitle1'>Editar tarefa</Typography>
       <form onSubmit={editHandler}>
         <TextField
           required
@@ -128,7 +128,7 @@ export default function ModalEdit(props) {
               variant='contained'
               fullWidth
             >
-              Salvar nota
+              Salvar tarefa
             </Button>
           </Grid>
           <Grid item xs={6}>
