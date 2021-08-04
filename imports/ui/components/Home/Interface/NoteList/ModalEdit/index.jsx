@@ -79,7 +79,7 @@ export default function ModalEdit(props) {
             shrink: true,
           }}
           variant='outlined'
-          label='Nota'
+          label='Tarefa'
           margin='normal'
           fullWidth
         />

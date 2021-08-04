@@ -68,7 +68,7 @@ export default function ModalCreate() {
             shrink: true,
           }}
           variant='outlined'
-          label='Nota'
+          label='Tarefa'
           margin='normal'
           fullWidth
         />
