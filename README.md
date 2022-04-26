@@ -11,6 +11,7 @@
 ### Estilização:
 * Foram usadas as bibliotecas Material-UI e Styled-Components para criar uma interface elegante e reponsiva.
 
+--Edit 26/04/2022--
 ### Imagens:
 Essas sãos as poucas imagens que consegui recuperar do aplicatico em execução.
 
